@@ -1,21 +1,26 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import { pdfjs } from 'react-pdf';
 import './App.css';
 
 function App() {
+  const resumeUrl = process.env.PUBLIC_URL + '/shan_resume1.pdf';
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+        <h1>Resume</h1>
+        
+        
+        <div style={{ width: '100%', maxWidth: '600px' }}>
+          <Worker workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`}>
+            <Viewer fileUrl={resumeUrl} />
+          </Worker>
+        </div>
+        
+        <a href={resumeUrl} download="shan_resume1.pdf" className="cta">
+          Download Resume
         </a>
       </header>
     </div>
